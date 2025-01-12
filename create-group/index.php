@@ -34,8 +34,8 @@
                     </div>
 
                     <div class="form">
-                        <input type="text" placeholder="Group name..." />
-                        <button>Create group</button>
+                        <input id="name-field" type="text" placeholder="Group name..." />
+                        <button onclick="studycat_create_group($('#name-field').val(), (id) => { location = '/group/?id=' + id; }, alert)">Create group</button>
                     </div>
                 </div>
             </div>
