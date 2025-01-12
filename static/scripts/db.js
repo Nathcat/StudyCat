@@ -72,3 +72,19 @@ function studycat_add_to_group(groupId, id, on_success, on_fail) {
         else on_fail(r.message);
     });
 }
+
+function studycat_toggle_admin(groupId, id, on_success, on_fail) {
+    fetch(DB_ROOT + "study/toggle-admin.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "groupId": groupId,
+            "id": id
+        })
+    }).then((r) => r.json()).then((r) => {
+        if (r.status === "success") on_success();
+        else on_fail(r.message);
+    })
+}
