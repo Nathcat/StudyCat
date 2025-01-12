@@ -1,0 +1,50 @@
+.main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+
+    grid-template-areas: 
+        "user"
+        "groups";
+}
+
+.main .user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    grid-area: user;
+}
+
+.main .groups {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+    grid-area: groups;
+}
+
+.main .groups .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.main .groups .container .content-card {
+    min-width: fit-content;
+    width: 50%;
+    text-align: center;
+}
+
+.main .groups .container .content-card:hover {
+    cursor: pointer;
+    background: linear-gradient(45deg, #e600ff 0%, #00ccff 100%);
+}

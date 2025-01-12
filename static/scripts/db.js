@@ -15,7 +15,7 @@ function studycat_create_group(name, on_success, on_fail) {
 }
 
 function studycat_get_chat_info(id, on_success, on_fail) {
-    fetch(DB_ROOT + "study/get-chat-info.php", {
+    fetch(DB_ROOT + "study/get-group-info.php", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -87,4 +87,14 @@ function studycat_toggle_admin(groupId, id, on_success, on_fail) {
         if (r.status === "success") on_success();
         else on_fail(r.message);
     })
+}
+
+function studycat_get_all_groups(on_success, on_fail) {
+    fetch(DB_ROOT + "study/get-all-groups.php", {
+        method: "GET",
+        credentials: "include"
+    }).then((r) => r.json()).then((r) => {
+        if (r.status === "success") on_success(r.groups, r.ownedGroups);
+        else on_fail(r.message);
+    });
 }

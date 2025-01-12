@@ -24,6 +24,7 @@
             <div class="profile-picture"></div>
             <h2 id="ownerFullName"></h2>
             <h3 id="ownerUsername"></h3>
+            <h4 id="role"></h4>
 
             <div class="content-card">
                 <h2>Group Members</h2>
@@ -66,6 +67,8 @@
         $(".main .profile-picture").html("<img src='https://cdn.nathcat.net/pfps/" + group.ownerPfpPath + "' />");
         $(".main #ownerFullName").text(group.ownerFullName);
         $(".main #ownerUsername").html("<i>" + group.ownerUsername + "</i>");
+        let isOwner = group.ownerUsername === "<?php echo $_SESSION["user"]["username"]; ?>"
+        $(".main #role").html(isOwner ? "<b><i>You own this group</i></b>" : "<b><i>You are a member of this group</i></b>");
 
         studycat_check_if_admin(id, (isAdmin) => {
             for (let i = 0; i < members.length; i++) {
@@ -73,6 +76,7 @@
             }
 
             if (isAdmin === 1) {
+                if (!isOwner) $(".main #role").html("<b><i>You are an admin of this group</i></b>");
                 document.getElementById("main").innerHTML += "<div class='column content-card'><h2>Add users to group</h2><input id='user-search-field' type='text' placeholder='Enter username...'><button onclick='user_search($(\"#user-search-field\").val())'>Search</button><div id='search-results' class='column'></div></div>";
                 $("#user-search-field").on("keydown", function(e) {
                     if (e.key === "Enter") {
