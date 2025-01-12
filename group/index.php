@@ -17,6 +17,8 @@
         <?php include("../header.php"); ?>
 
         <div id="main" class="main align-center justify-center">
+            <a href="/">Return home</a>
+            
             <h1 id="name"></h1>
             <h2>Created by</h2>
             <div class="profile-picture"></div>
