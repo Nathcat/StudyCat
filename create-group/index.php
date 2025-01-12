@@ -35,10 +35,20 @@
 
                     <div class="form">
                         <input id="name-field" type="text" placeholder="Group name..." />
-                        <button onclick="studycat_create_group($('#name-field').val(), (id) => { location = '/group/?id=' + id; }, alert)">Create group</button>
+                        <button id="submit-button" onclick="studycat_create_group($('#name-field').val(), (id) => { location = '/group/?id=' + id; }, alert)">Create group</button>
+
+                        <script>
+                            $("#name-field").on("keydown", function(e) {
+                                if (e.key === "Enter") {
+                                    studycat_create_group($('#name-field').val(), (id) => { location = '/group/?id=' + id; }, alert);
+                                }
+                            })
+                        </script>
                     </div>
                 </div>
             </div>
+
+            <?php include("../footer.php"); ?>
         </div>
     </body>
 </html>

@@ -102,5 +102,15 @@ function studycat_get_all_groups(on_success, on_fail) {
 function studycat_delete_group(id, on_success, on_fail) {
     if (!confirm("Are you sure you want to delete this group?")) return;
 
-    alert("Not implemented!");
+    fetch(DB_ROOT + "study/delete-group.php", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"groupId": id})
+    }).then((r) => r.json()).then((r) => {
+        if (r.status === "success") on_success();
+        else on_fail(r.message);
+    });
 }
