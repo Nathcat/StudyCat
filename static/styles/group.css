@@ -1,0 +1,46 @@
+@media (width > 1000px) {
+    .main {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+
+        grid-template-areas:
+            "info actions"
+            "info admin-actions";
+    }
+}
+
+@media (max-width: 1000px) {
+    .main {
+        display: grid;
+
+        grid-template-columns: 1fr ;
+        grid-template-rows: repeat(4, 1fr);
+
+        grid-template-areas:
+            "info"
+            "info"
+            "actions"
+            "admin-actions";
+    }
+}
+
+
+#group-info {
+    grid-area: info;
+}
+
+#admin-actions {
+    grid-area: admin-actions;
+}
+
+#actions {
+    grid-area: actions;
+    padding: 25px;
+}
+
+#actions button {
+    padding: 50px;
+    font-size: 2em;
+}

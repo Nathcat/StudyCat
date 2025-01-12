@@ -98,3 +98,9 @@ function studycat_get_all_groups(on_success, on_fail) {
         else on_fail(r.message);
     });
 }
+
+function studycat_delete_group(id, on_success, on_fail) {
+    if (!confirm("Are you sure you want to delete this group?")) return;
+
+    alert("Not implemented!");
+}

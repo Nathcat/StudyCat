@@ -5,6 +5,7 @@
     <title>StudyCat</title>
 
     <link rel="stylesheet" href="https://nathcat.net/static/css/new-common.css">
+    <link rel="stylesheet" href="/static/styles/group.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -16,19 +17,26 @@
     <div class="content">
         <?php include("../header.php"); ?>
 
-        <div id="main" class="main align-center justify-center">
-            <a href="/">Return home</a>
-            
-            <h1 id="name"></h1>
-            <h2>Created by</h2>
-            <div class="profile-picture"></div>
-            <h2 id="ownerFullName"></h2>
-            <h3 id="ownerUsername"></h3>
-            <h4 id="role"></h4>
+        <div id="main" class="main">
+            <div id="group-info" class="column align-center justify-center">
+                <a href="/">Return home</a>
 
-            <div class="content-card">
-                <h2>Group Members</h2>
-                <div id="member-list" class="column align-center"></div>
+                <h1 id="name"></h1>
+                <h2>Created by</h2>
+                <div class="profile-picture"></div>
+                <h2 id="ownerFullName"></h2>
+                <h3 id="ownerUsername"></h3>
+                <h4 id="role"></h4>
+
+                <div class="content-card">
+                    <h2>Group Members</h2>
+                    <div id="member-list" class="column align-center"></div>
+                </div>
+            </div>
+
+            <div id="actions" class="column">
+                <button>Take this week's quiz</button>
+                <button>Create a question</button>
             </div>
         </div>
 
@@ -52,7 +60,7 @@
             } else {
                 let html = "";
                 for (const [key, value] of Object.entries(results)) {
-                    html += "<div class='row align-center'><div class='small-profile-picture'><img src='https://cdn.nathcat.net/pfps/" + value.pfpPath + "' /></div><div class='column align-center justify-center' style='padding-left: 25px;'><h3>" + value.fullName + "</h3><h3><i>" + value.username + "</i></h3></div><button onclick='studycat_add_to_group(" + id + ", " + value.id + ", () => { location.reload(); }, alert)'>Add " + value.fullName + " to this group</button></div>";
+                    html += "<div class='row align-center'><div class='small-profile-picture'><img src='https://cdn.nathcat.net/pfps/" + value.pfpPath + "' /></div><h3 style='padding-left: 25px;'><i>" + value.username + "</i></h3><button onclick='studycat_add_to_group(" + id + ", " + value.id + ", () => { location.reload(); }, alert)'>Add " + value.fullName + " to this group</button></div>";
                 }
 
                 $("#search-results").html(html);
@@ -63,12 +71,12 @@
 
 
     studycat_get_chat_info(id, (group, members) => {
-        $(".main #name").text(group.name);
-        $(".main .profile-picture").html("<img src='https://cdn.nathcat.net/pfps/" + group.ownerPfpPath + "' />");
-        $(".main #ownerFullName").text(group.ownerFullName);
-        $(".main #ownerUsername").html("<i>" + group.ownerUsername + "</i>");
+        $("#group-info #name").text(group.name);
+        $("#group-info .profile-picture").html("<img src='https://cdn.nathcat.net/pfps/" + group.ownerPfpPath + "' />");
+        $("#group-info #ownerFullName").text(group.ownerFullName);
+        $("#group-info #ownerUsername").html("<i>" + group.ownerUsername + "</i>");
         let isOwner = group.ownerUsername === "<?php echo $_SESSION["user"]["username"]; ?>"
-        $(".main #role").html(isOwner ? "<b><i>You own this group</i></b>" : "<b><i>You are a member of this group</i></b>");
+        $("#group-info #role").html(isOwner ? "<b><i>You own this group</i></b>" : "<b><i>You are a member of this group</i></b>");
 
         studycat_check_if_admin(id, (isAdmin) => {
             for (let i = 0; i < members.length; i++) {
@@ -76,8 +84,8 @@
             }
 
             if (isAdmin === 1) {
-                if (!isOwner) $(".main #role").html("<b><i>You are an admin of this group</i></b>");
-                document.getElementById("main").innerHTML += "<div class='column content-card'><h2>Add users to group</h2><input id='user-search-field' type='text' placeholder='Enter username...'><button onclick='user_search($(\"#user-search-field\").val())'>Search</button><div id='search-results' class='column'></div></div>";
+                if (!isOwner) $("#group-info #role").html("<b><i>You are an admin of this group</i></b>");
+                document.getElementById("main").innerHTML += "<div id='admin-actions' class='column'><div class='column content-card'><h2>Add users to group</h2><input id='user-search-field' type='text' placeholder='Enter username...'><button onclick='user_search($(\"#user-search-field\").val())'>Search</button><div id='search-results' class='column'></div></div>" + (isOwner ? "<button onclick='studycat_delete_group(" + id + ", () => { location = \"/\"; }, alert)'>Delete group</button>" : "") + "</div>";
                 $("#user-search-field").on("keydown", function(e) {
                     if (e.key === "Enter") {
                         user_search($(this).val());
