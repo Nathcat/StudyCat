@@ -30,7 +30,7 @@
 
                 <div style="width: 90%; min-width: fit-content;" class="content-card">
                     <h2>Group Members</h2>
-                    <div id="member-list" class="column align-center"></div>
+                    <div id="member-list" class="column"></div>
                 </div>
             </div>
 
@@ -92,7 +92,7 @@
 
         studycat_check_if_admin(id, (isAdmin) => {
             for (let i = 0; i < members.length; i++) {
-                document.getElementById("member-list").innerHTML += "<div class='row align-center'><div class='small-profile-picture'><img src='https://cdn.nathcat.net/pfps/" + members[i].pfpPath + "' /></div><h3 style='padding-left: 25px;'>" + members[i].fullName + "</h3>" + (members[i].admin ? "<h3 style='padding-left: 25px;'><i>Administrator</i></h3>" : "") + (isAdmin ? "<button onclick='studycat_toggle_admin(" + id + ", " + members[i].id + ", () => { location.reload(); }, alert)'>Toggle admin for " + members[i].fullName + "</button>" : "") + "</div>";
+                document.getElementById("member-list").innerHTML += "<div style='margin-bottom: 10px;' class='row align-center'><div class='small-profile-picture'><img src='https://cdn.nathcat.net/pfps/" + members[i].pfpPath + "' /></div><h3 style='padding-left: 25px;'>" + members[i].fullName + "</h3>" + (members[i].admin ? "<h3 style='padding-left: 25px;'><i>Administrator</i></h3>" : "") + (isAdmin ? "<button onclick='studycat_toggle_admin(" + id + ", " + members[i].id + ", () => { location.reload(); }, alert)'>Toggle admin for " + members[i].fullName + "</button>" : "") + "</div>";
             }
 
             if (isAdmin) {
