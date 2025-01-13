@@ -55,7 +55,7 @@ try {
 
     if ($isMCQ) {
         for ($i = 0; $i < count($r["mcqOptions"]); $i++) {
-            $stmt = $conn->prepare("INSERT INTO `MultipleChoiceOptions` (`group`, `submittedBy`, `questionId`, `index`, `content`) values (?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO `multiplechoiceoptions` (`group`, `submittedBy`, `questionId`, `index`, `content`) values (?, ?, ?, ?, ?)");
             $stmt->bind_param("iisis", $r["groupId"], $_SESSION["user"]["id"], $q_id, $i, $r["mcqOptions"][$i]);
             $stmt->execute();
             $stmt->close();

@@ -23,7 +23,7 @@ try {
 }
 
 try {
-    $__stmt = $__conn->prepare("SELECT `user`, `admin` FROM `GroupMembers` JOIN SSO.Users ON `user` = SSO.Users.id WHERE `group` = ? AND `user` = ?");
+    $__stmt = $__conn->prepare("SELECT `user`, `admin` FROM `groupmembers` JOIN SSO.Users ON `user` = SSO.Users.id WHERE `group` = ? AND `user` = ?");
     $__stmt->bind_param("ii", $r["groupId"], $_SESSION["user"]["id"]);
     $__stmt->execute();
 

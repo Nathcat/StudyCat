@@ -28,7 +28,7 @@ if ($conn->connect_error) {
 
 try {    
     $week = floor(time() / 604800);
-    $stmt = $conn->prepare("INSERT INTO `PastQuizScores` (`group`, `user`, `score`, `week`) values (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO `pastquizscores` (`group`, `user`, `score`, `week`) values (?, ?, ?, ?)");
     $stmt->bind_param("iidi", $r["groupId"], $_SESSION["user"]["id"], $r["score"], $week);
     $stmt->execute();
 

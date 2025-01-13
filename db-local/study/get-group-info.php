@@ -48,7 +48,7 @@ $stmt->close();
 try {
     ;
 
-    $stmt = $conn->prepare("SELECT SSO.Users.id AS 'id', SSO.Users.username AS 'username', SSO.Users.fullName AS 'fullName', SSO.Users.pfpPath AS 'pfpPath', `admin` FROM `GroupMembers` JOIN SSO.Users ON `user` = SSO.Users.id WHERE `group` = ?");
+    $stmt = $conn->prepare("SELECT SSO.Users.id AS 'id', SSO.Users.username AS 'username', SSO.Users.fullName AS 'fullName', SSO.Users.pfpPath AS 'pfpPath', `admin` FROM `groupmembers` JOIN SSO.Users ON `user` = SSO.Users.id WHERE `group` = ?");
     $stmt->bind_param("i", $r["id"]);
     $stmt->execute();
 
