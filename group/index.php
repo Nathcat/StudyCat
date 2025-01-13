@@ -35,7 +35,7 @@
             </div>
 
             <div id="actions" class="column">
-                <button>Take this week's quiz</button>
+                <button onclick='location = "/quiz/?id=" + new URLSearchParams(window.location.search).get("id");'>Take this week's quiz</button>
             </div>
         </div>
 
@@ -50,7 +50,7 @@
         location = "/";
     }
 
-    let id = searchParams.get("id");
+    var id = searchParams.get("id");
 
     let user_search = (username) => {
         studycat_search_users(username, (results) => {

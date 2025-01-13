@@ -136,3 +136,14 @@ function studycat_create_question(groupId, content, mcqOrString, answer, mcqOpti
         else on_fail(r.message);
     });
 }
+
+function studycat_get_active_questions(id, on_success, on_fail) {
+    fetch(DB_ROOT + "study/get-active-questions.php", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({"id": id})
+    }).then((r) => r.json()).then((r) => {
+        if (r.status === "success") on_success(r.questions);
+        else on_fail(r.message);
+    });
+}
