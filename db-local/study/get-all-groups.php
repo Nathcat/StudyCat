@@ -40,7 +40,7 @@ try {
 try {
     ;
 
-    $stmt = $conn->prepare("SELECT `groups`.`id` AS 'id', `groups`.`owner` AS 'owner', `groups`.`name` AS 'name' FROM `groups` JOIN `groupmembers` ON `groupmembers`.`group` = `groups`.`id` WHERE `groups`.`owner` = ?");
+    $stmt = $conn->prepare("SELECT `groups`.`id` AS 'id', `groups`.`owner` AS 'owner', `groups`.`name` AS 'name' FROM `groups` WHERE `groups`.`owner` = ?");
     $stmt->bind_param("i", $_SESSION["user"]["id"]);
     $stmt->execute();
     $set = $stmt->get_result();
