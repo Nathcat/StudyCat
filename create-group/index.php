@@ -19,6 +19,8 @@
             <div class="main">
                 <div class="form-container">
                     <div class="text">
+                        <a href="/">Return home</a>
+
                         <h2>Create a new study group</h2>
                         <p>
                             You can use this page to create a new study group.

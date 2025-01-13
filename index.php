@@ -51,9 +51,8 @@
                 html += g_html(ownedGroups[i]);
             }
 
-            html += "<button onclick='location = \"/create-group\"'>Create a new group!</button>";
-
             document.getElementById("groups-container").innerHTML = html;
+            $(".groups").append("<button onclick='location = \"/create-group\"'>Create a new group!</button>");
         }, alert);
     </script>
 </html>
