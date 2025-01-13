@@ -46,8 +46,6 @@ if ($conn->connect_error) {
 }
 
 try {
-    MYSQLI_REPORT(MYSQLI_REPORT_ALL);
-
     $stmt = $conn->prepare("CALL create_question(?, ?, ?, " . ($isMCQ ? "?, null" : "null, ?") . ")");
     $stmt->bind_param("iis" . ($isMCQ ? "i" : "s"), $r["groupId"], $_SESSION["user"]["id"], $r["content"], $r["answer"]);
     $stmt->execute();

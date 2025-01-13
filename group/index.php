@@ -87,7 +87,7 @@
         }
 
         if (isMember) {
-            $("#actions").append("<button>Create a question</button>");
+            $("#actions").append("<button onclick='location = \"/create-question/?id=" + id + "\"'>Create a question</button>");
         }
 
         studycat_check_if_admin(id, (isAdmin) => {
