@@ -21,24 +21,53 @@ if (!array_key_exists("groupId", $r) || !array_key_exists("id", $r)) {
     ]));
 }
 
-include("__determine-access-level.php");
-
+$isMember = false;
 $conn = new mysqli("localhost:3306", "study", "", "StudyCat");
 
 if ($conn->connect_error) {
     die("{\"status\": \"fail\", \"message\": \"Failed to connect to the database: " . $conn->connect_error . "\"}");
 }
 
+try {
+    $stmt = $conn->prepare("SELECT `owner` FROM `groups` WHERE `id` = ?");
+    $stmt->bind_param("i", $r["groupId"]);
+    $stmt->execute();
 
-if (!$_IS_ADMIN) {
+    $owner = $stmt->get_result()->fetch_assoc()["owner"];
+    if ($owner == $_SESSION["user"]["id"]) $isMember = true;
+
+    $stmt->close();
+
+} catch (Exception $e) {
+    $conn->close();
+    die("{\"status\": \"fail\", \"message\": \"$e\"}");
+}
+
+try {
+    $stmt = $conn->prepare("SELECT `user` FROM `GroupMembers` JOIN SSO.Users ON `user` = SSO.Users.id WHERE `group` = ? AND `user` = ?");
+    $stmt->bind_param("ii", $r["groupId"], $_SESSION["user"]["id"]);
+    $stmt->execute();
+
+    $set = $stmt->get_result();
+    if ($set->fetch_assoc()) $isMember = true;
+
+    $stmt->close();
+
+} catch (Exception $e) {
+    $conn->close();
+    die("{\"status\": \"fail\", \"message\": \"$e\"}");
+}
+
+
+if (!$isMember) {
     die(json_encode([
         "status" => "fail",
-        "message" => "You are not an admin of this group!"
+        "message" => "You are not a member of this group!"
     ]));
 }
 
 try {
-    $stmt = $conn->prepare("UPDATE `groupmembers` SET `admin` = b'1' - `admin` WHERE `group` = ? AND `user` = ?");
+    $stmt = $conn->prepare("INSERT INTO `groupmembers` (`group`, `user`) VALUES (?, ?)");
     $stmt->bind_param("ii", $r["groupId"], $r["id"]);
     $stmt->execute();
 

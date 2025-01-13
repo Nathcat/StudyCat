@@ -21,33 +21,19 @@ if (!array_key_exists("groupId", $r)) {
     ]));
 }
 
+include("__determine-access-level.php");
+
+if (!$_IS_OWNER) {
+    die(json_encode([
+        "status" => "fail",
+        "message" => "You do not own this group!"
+    ]));
+}
+
 $conn = new mysqli("localhost:3306", "study", "", "StudyCat");
 
 if ($conn->connect_error) {
     die("{\"status\": \"fail\", \"message\": \"Failed to connect to the database: " . $conn->connect_error . "\"}");
-}
-
-
-try {
-    ;
-
-    $stmt = $conn->prepare("SELECT `owner` FROM `groups` WHERE `id` = ?");
-    $stmt->bind_param("i", $r["groupId"]);
-    $stmt->execute();
-
-    $owner = $stmt->get_result()->fetch_assoc()["owner"];
-    if ($owner != $_SESSION["user"]["id"]) {
-        die(json_encode([
-            "status" => "fail",
-            "message" => "You do not own this group!"
-        ]));
-    }
-
-    $stmt->close();
-
-} catch (Exception $e) {
-    $conn->close();
-    die("{\"status\": \"fail\", \"message\": \"$e\"}");
 }
 
 try {
