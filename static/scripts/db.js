@@ -1,4 +1,4 @@
-const DB_ROOT = "http://localhost/db-local/";  // Change this to data.nathcat.net on deployment
+const DB_ROOT = "https://data.nathcat.net/";  // Change this to data.nathcat.net on deployment
 
 function studycat_create_group(name, on_success, on_fail) {
     fetch(DB_ROOT + "study/create-group.php", {
