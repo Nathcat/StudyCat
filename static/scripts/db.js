@@ -115,13 +115,15 @@ function studycat_delete_group(id, on_success, on_fail) {
     });
 }
 
-function studycat_create_question(groupId, content, mcqOrString, answer, mcqOptions = null, on_success, on_fail) {
+function studycat_create_question(groupId, content, mcqOrString, answer, mcqOptions, on_success, on_fail) {
     let r = {
         "groupId": groupId,
         "content": content,
         "mcqOrString": mcqOrString,
         "answer": answer
     }
+
+    if (content === "" || answer === "") { alert("Cannot leave question or answer blank!"); return; }
 
     if (mcqOrString === "mcq") r.mcqOptions = mcqOptions;
 
