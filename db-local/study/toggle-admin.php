@@ -71,7 +71,7 @@ if ($is_admin == 0) {
 }
 
 try {
-    mysqli_report(MYSQLI_REPORT_ALL);
+    ;
 
     $stmt = $conn->prepare("UPDATE `groupmembers` SET `admin` = b'1' - `admin` WHERE `group` = ? AND `user` = ?");
     $stmt->bind_param("ii", $r["groupId"], $r["id"]);

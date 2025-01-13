@@ -71,8 +71,6 @@ if ($is_admin == 0) {
 }
 
 try {
-    mysqli_report(MYSQLI_REPORT_ALL);
-
     $stmt = $conn->prepare("INSERT INTO `groupmembers` (`group`, `user`) VALUES (?, ?)");
     $stmt->bind_param("ii", $r["groupId"], $r["id"]);
     $stmt->execute();

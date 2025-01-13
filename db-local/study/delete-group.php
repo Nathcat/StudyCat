@@ -29,7 +29,7 @@ if ($conn->connect_error) {
 
 
 try {
-    mysqli_report(MYSQLI_REPORT_ALL);
+    ;
 
     $stmt = $conn->prepare("SELECT `owner` FROM `groups` WHERE `id` = ?");
     $stmt->bind_param("i", $r["groupId"]);
@@ -51,7 +51,7 @@ try {
 }
 
 try {
-    mysqli_report(MYSQLI_REPORT_ALL);
+    ;
 
     $stmt = $conn->prepare("DELETE FROM `groups` WHERE `id` = ?");
     $stmt->bind_param("i", $r["groupId"]);

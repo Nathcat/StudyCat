@@ -29,7 +29,7 @@ if ($conn->connect_error) {
 }
 
 try {
-    mysqli_report(MYSQLI_REPORT_ALL);
+    ;
 
     $stmt = $conn->prepare("SELECT `owner` FROM `groups` WHERE `id` = ?");
     $stmt->bind_param("i", $r["groupId"]);
@@ -48,7 +48,7 @@ try {
 }
 
 try {
-    mysqli_report(MYSQLI_REPORT_ALL);
+    ;
 
     $stmt = $conn->prepare("SELECT `admin` FROM `GroupMembers` JOIN SSO.Users ON `user` = SSO.Users.id WHERE `group` = ? AND `user` = ?");
     $stmt->bind_param("ii", $r["groupId"], $_SESSION["user"]["id"]);

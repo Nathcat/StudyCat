@@ -21,7 +21,7 @@ $groups = [];
 $owned_groups = [];
 
 try {
-    mysqli_report(MYSQLI_REPORT_ALL);
+    ;
 
     $stmt = $conn->prepare("SELECT `groups`.`id` AS 'id', `groups`.`owner` AS 'owner', `groups`.`name` AS 'name', `groupmembers`.`admin` FROM `groupmembers` JOIN `groups` ON `groupmembers`.`group` = `groups`.`id` WHERE `groupmembers`.`user` = ?");
     $stmt->bind_param("i", $_SESSION["user"]["id"]);
@@ -38,7 +38,7 @@ try {
 }
 
 try {
-    mysqli_report(MYSQLI_REPORT_ALL);
+    ;
 
     $stmt = $conn->prepare("SELECT `groups`.`id` AS 'id', `groups`.`owner` AS 'owner', `groups`.`name` AS 'name' FROM `groups` JOIN `groupmembers` ON `groupmembers`.`group` = `groups`.`id` WHERE `groups`.`owner` = ?");
     $stmt->bind_param("i", $_SESSION["user"]["id"]);

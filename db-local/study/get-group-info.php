@@ -28,7 +28,7 @@ if ($conn->connect_error) {
 }
 
 try {
-    mysqli_report(MYSQLI_REPORT_ALL);
+    ;
 
     $stmt = $conn->prepare("SELECT `name`, SSO.Users.id AS 'ownerId', SSO.Users.username AS 'ownerUsername', SSO.Users.fullName AS 'ownerFullName', SSO.Users.pfpPath AS 'ownerPfpPath' FROM `groups` JOIN SSO.Users ON SSO.Users.id = `groups`.`owner` WHERE `groups`.`id` = ?");
     $stmt->bind_param("i", $r["id"]);
@@ -46,7 +46,7 @@ $results = [
 $stmt->close();
 
 try {
-    mysqli_report(MYSQLI_REPORT_ALL);
+    ;
 
     $stmt = $conn->prepare("SELECT SSO.Users.id AS 'id', SSO.Users.username AS 'username', SSO.Users.fullName AS 'fullName', SSO.Users.pfpPath AS 'pfpPath', `admin` FROM `GroupMembers` JOIN SSO.Users ON `user` = SSO.Users.id WHERE `group` = ?");
     $stmt->bind_param("i", $r["id"]);
