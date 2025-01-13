@@ -1,5 +1,5 @@
 <?php
-include("../start-session.php");
+include("../sso/start-session.php");
 
 header("Content-Type: application/json");
 if (array_key_exists("HTTP_ORIGIN", $_SERVER)) header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
