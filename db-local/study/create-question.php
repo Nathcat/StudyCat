@@ -46,8 +46,9 @@ if ($conn->connect_error) {
 }
 
 try {
-    $stmt = $conn->prepare("CALL create_question(?, ?, ?, " . ($isMCQ ? "?, null" : "null, ?") . ")");
-    $stmt->bind_param("iis" . ($isMCQ ? "i" : "s"), $r["groupId"], $_SESSION["user"]["id"], $r["content"], $r["answer"]);
+    $week = floor(time() / 604800);
+    $stmt = $conn->prepare("CALL create_question(?, ?, ?, " . ($isMCQ ? "?, null" : "null, ?") . ", ?)");
+    $stmt->bind_param("iis" . ($isMCQ ? "i" : "s") . "i", $r["groupId"], $_SESSION["user"]["id"], $r["content"], $r["answer"], $week);
     $stmt->execute();
     $q_id = $stmt->get_result()->fetch_assoc()["id"];
     $stmt->close();

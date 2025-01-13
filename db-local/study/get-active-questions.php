@@ -28,8 +28,9 @@ if ($conn->connect_error) {
 }
 
 try {
-    $stmt = $conn->prepare("SELECT * FROM `questions` WHERE `active` = 1 AND `group` = ?");
-    $stmt->bind_param("i", $r["id"]);
+    $week = floor(time() / 604800) - 1;
+    $stmt = $conn->prepare("SELECT * FROM `questions` WHERE `week` = ? AND `group` = ?");
+    $stmt->bind_param("ii", $week, $r["id"]);
     $stmt->execute();
 
     $questions = [];
@@ -47,7 +48,7 @@ try {
 
 for ($i = 0; $i < count($questions); $i++) {
     try {
-        $stmt = $conn->prepare("SELECT `index`, `content` FROM `multiplechoiceoptions` WHERE `group` = ? AND `submittedBy` = ? AND `questionId` = ?");
+        $stmt = $conn->prepare("SELECT `index`, `content` FROM `multiplechoiceoptions` WHERE `group` = ? AND `submittedBy` = ? AND `questionId` = ? ORDER BY `index` ASC");
         $stmt->bind_param("iis", $r["id"], $questions[$i]["submittedBy"], $questions[$i]["id"]);
         $stmt->execute();
     

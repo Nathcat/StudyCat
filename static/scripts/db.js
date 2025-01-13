@@ -147,3 +147,17 @@ function studycat_get_active_questions(id, on_success, on_fail) {
         else on_fail(r.message);
     });
 }
+
+function studycat_submit_score(id, score, on_success, on_fail) {
+    fetch(DB_ROOT + "study/submit-score.php", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({
+            "groupId": id,
+            "score": score
+        })
+    }).then((r) => r.json()).then((r) => {
+        if (r.status === "success") on_success();
+        else on_fail(r.message);
+    })
+}
