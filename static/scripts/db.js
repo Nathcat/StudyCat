@@ -48,6 +48,7 @@ function studycat_search_users(username, on_success, on_fail) {
         headers: {
             "Content-Type": "application/json"
         },
+        credentials: "include",
         body: JSON.stringify({
             "username": username
         })
@@ -63,6 +64,7 @@ function studycat_add_to_group(groupId, id, on_success, on_fail) {
         headers: {
             "Content-Type": "application/json"
         },
+        credentials: "include",
         body: JSON.stringify({
             "groupId": groupId,
             "id": id
@@ -79,6 +81,7 @@ function studycat_toggle_admin(groupId, id, on_success, on_fail) {
         headers: {
             "Content-Type": "application/json"
         },
+        credentials: "include",
         body: JSON.stringify({
             "groupId": groupId,
             "id": id
