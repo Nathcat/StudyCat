@@ -28,7 +28,7 @@
                 <h3 id="ownerUsername"></h3>
                 <h4 id="role"></h4>
 
-                <div class="content-card">
+                <div style="width: 90%; min-width: fit-content;" class="content-card">
                     <h2>Group Members</h2>
                     <div id="member-list" class="column align-center"></div>
                 </div>
@@ -36,7 +36,6 @@
 
             <div id="actions" class="column">
                 <button>Take this week's quiz</button>
-                <button>Create a question</button>
             </div>
         </div>
 
@@ -77,6 +76,19 @@
         $("#group-info #ownerUsername").html("<i>" + group.ownerUsername + "</i>");
         let isOwner = group.ownerUsername === "<?php echo $_SESSION["user"]["username"]; ?>"
         $("#group-info #role").html(isOwner ? "<b><i>You own this group</i></b>" : "<b><i>You are a member of this group</i></b>");
+
+        let isMember = isOwner;
+        let i = 0;
+        while (i < members.length && !isMember) {
+            if (members[i++].id === <?php echo $_SESSION["user"]["id"]; ?>) {
+                isMember = true;
+                break;
+            }
+        }
+
+        if (isMember) {
+            $("#actions").append("<button>Create a question</button>");
+        }
 
         studycat_check_if_admin(id, (isAdmin) => {
             for (let i = 0; i < members.length; i++) {
