@@ -48,7 +48,6 @@ function studycat_search_users(username, on_success, on_fail) {
         headers: {
             "Content-Type": "application/json"
         },
-        credentials: "include",
         body: JSON.stringify({
             "username": username
         })
