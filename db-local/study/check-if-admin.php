@@ -28,6 +28,4 @@ echo json_encode([
     "isAdmin" => $_IS_ADMIN
 ]);
 
-$conn->close();
-
 ?>

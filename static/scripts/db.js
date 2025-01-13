@@ -114,3 +114,23 @@ function studycat_delete_group(id, on_success, on_fail) {
         else on_fail(r.message);
     });
 }
+
+function studycat_create_question(groupId, content, mcqOrString, answer, mcqOptions = null, on_success, on_fail) {
+    let r = {
+        "groupId": groupId,
+        "content": content,
+        "mcqOrString": mcqOrString,
+        "answer": answer
+    }
+
+    if (mcqOrString === "mcq") r.mcqOptions = mcqOptions;
+
+    fetch(DB_ROOT + "study/create-question.php", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(r)
+    }).then((r) => r.json()).then((r) => {
+        if (r.status === "success") on_success();
+        else on_fail(r.message);
+    });
+}

@@ -95,7 +95,7 @@
                 document.getElementById("member-list").innerHTML += "<div class='row align-center'><div class='small-profile-picture'><img src='https://cdn.nathcat.net/pfps/" + members[i].pfpPath + "' /></div><h3 style='padding-left: 25px;'>" + members[i].fullName + "</h3>" + (members[i].admin ? "<h3 style='padding-left: 25px;'><i>Administrator</i></h3>" : "") + (isAdmin === 1 ? "<button onclick='studycat_toggle_admin(" + id + ", " + members[i].id + ", () => { location.reload(); }, alert)'>Toggle admin for " + members[i].fullName + "</button>" : "") + "</div>";
             }
 
-            if (isAdmin === 1) {
+            if (isAdmin) {
                 if (!isOwner) $("#group-info #role").html("<b><i>You are an admin of this group</i></b>");
                 document.getElementById("main").innerHTML += "<div id='admin-actions' class='column'><div class='column content-card'><h2>Add users to group</h2><input id='user-search-field' type='text' placeholder='Enter username...'><button onclick='user_search($(\"#user-search-field\").val())'>Search</button><div id='search-results' class='column'></div></div>" + (isOwner ? "<button onclick='studycat_delete_group(" + id + ", () => { location = \"/\"; }, alert)'>Delete group</button>" : "") + "</div>";
                 $("#user-search-field").on("keydown", function(e) {
