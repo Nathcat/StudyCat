@@ -31,6 +31,20 @@
         .content-card {
             width: 75%;
         }
+
+        #mcq-options {
+            align-items: start;
+            justify-content: start;
+            width: 100%;
+            margin-left: 25vw;
+        }
+
+        #text-entry {
+            width: 75vw;
+            height: 25%;
+            margin-left: 12.5vw;
+            margin-right: 12.5vw;
+        }
     </style>
 </head>
 
@@ -47,7 +61,7 @@
             </div>
 
             <div id="text-entry" class="column align-center justify-center">
-                <input type="text" placeholder="Enter answer..." />
+                <input style="width: 100%; height: 100%; font-size: 200%;" type="text" placeholder="Enter answer..." />
             </div>
 
             <div style="display: none;" id="mcq-options" class="column align-center justify-center">
@@ -202,6 +216,14 @@
                     isMcq = false;
                     $("#text-entry").css("display", "flex").val("");
                     $("#mcq-options").css("display", "none");
+
+                    $("#text-entry input").val("");
+
+                    $("#text-entry input").on("keydown", function(e) {
+                        if (e.key === "Enter") {
+                            user_search($(this).val());
+                        }
+                    });
                 }
 
                 MathJax.typeset();

@@ -44,7 +44,7 @@
         <div id="main" class="main">
             <div class="main column align-center" style="margin-bottom: 50px">
                 <div class="row align-center justify-center" style="width: 100%; height: 100%; margin-bottom: 50px;">
-                    <textarea style="min-height: fit-content; height: 50vw; min-width: 50vw; width: 100%; font-size: 1.5em;" id="question-edit-content"></textarea>
+                    <textarea style="min-height: fit-content; height: 50vw; min-width: 50vw; width: 50%; font-size: 1.5em;" id="question-edit-content"></textarea>
                     <div id="question-preview" class="post-content" style="margin-left: 10px"></div>
                 </div>
 
